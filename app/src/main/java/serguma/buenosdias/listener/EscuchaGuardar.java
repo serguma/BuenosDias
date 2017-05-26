@@ -33,8 +33,6 @@ public class EscuchaGuardar implements View.OnClickListener {
 
         if (activo.isChecked()) {
             Preferen.cambiarEstado(ctx,true);
-            Preferen.guardarTiempo(ctx, timepicker.getCurrentHour(), timepicker.getCurrentMinute());
-
             //Asigno el nuevo tiempo a la alarma
             long nuevoTiempo = Alarma.configuraAlarma(ctx, timepicker.getCurrentHour(), timepicker.getCurrentMinute(), 0);
             Alarma.programarAlarma(ctx, nuevoTiempo);

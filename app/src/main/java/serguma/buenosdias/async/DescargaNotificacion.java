@@ -95,20 +95,40 @@ public class DescargaNotificacion extends AsyncTask<Void, Void, BuenosDias> {
         //Lanzamos la notificación
         try {
 
-            //comprobamos la fecha
+            //TODO hacerlo método (Revisar que esté bien)
+            //comprobamos la fecha de la pref guardada
             String fechaNoti = Preferen.obtenerFecha(ctx);
+            String[] horaNoti = Preferen.obtenerTiempo(ctx);
+            String fechaNotiPref = fechaNoti+" "+horaNoti[0]+":"+horaNoti[1];
 
-            //TODO hacerlo método
             //Convierto el String En fecha
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date datePref = simpleDateFormat.parse(fechaNoti , new ParsePosition(0));
+            Date datePref = simpleDateFormat.parse(fechaNotiPref , new ParsePosition(0));
 
-            Calendar fechaActual = Calendar.getInstance();
+            //obtengo la fecha de la descarga
+            int anio = notificacion.getAnio();
+            int mes = notificacion.getMes();
+            int dia = notificacion.getDia();
+
+            //añado la hora
+            Date actual = new Date();
+
+            //String fechaNotiDesc = dia+"/"+mes+"/"+anio;
+
+            String fechaNotiDesc = "18/05/2017 "+actual.getHours()+":"+actual.getMinutes();
+            Date dateDescarga = simpleDateFormat.parse(fechaNotiDesc , new ParsePosition(0));
+
+            Calendar fechaDescarga = Calendar.getInstance();
             Calendar fechaPref = Calendar.getInstance();
             fechaPref.setTime(datePref);
+            fechaDescarga.setTime(dateDescarga);
 
-            if ( !fechaPref.before(fechaActual) ){
+            Log.d(getClass().getCanonicalName(), "FECHA GUARDADA "+fechaNotiPref);
+            Log.d(getClass().getCanonicalName(), "FECHA DESCARGADA "+fechaNotiDesc);
+
+            if ( !fechaPref.after(fechaDescarga) ){
                 Log.d(getClass().getCanonicalName(), "Lanzo");
+                Preferen.guardarFecha(ctx, dia+"/"+mes+"/"+anio );
                 Utils.lanzarNotiImagen(notificacion,ctx);
             }else{
                 Log.d(getClass().getCanonicalName(), "No lanzo");

@@ -33,20 +33,6 @@ public class Servicio extends Service {
         DescargaNotificacion descargaNotificacion = new DescargaNotificacion(this);
         descargaNotificacion.execute();
 
-        try {
-            int anio = descargaNotificacion.get().getAnio();
-            int mes = descargaNotificacion.get().getMes();
-            int dia = descargaNotificacion.get().getDia();
-
-            Preferen.guardarFecha(this, dia+"/"+mes+"/"+anio );
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
         stopSelf(startId);
         return super.onStartCommand(intent, flags, startId);
     }
@@ -54,6 +40,7 @@ public class Servicio extends Service {
     @Override
     public void onDestroy() {
 
+        //Actualizo la alarma
         long nuevoTiempo = Alarma.configuraAlarma(this, Integer.parseInt(Preferen.obtenerTiempo(this)[0]), Integer.parseInt(Preferen.obtenerTiempo(this)[1]), 1);
         Alarma.programarAlarma(this,nuevoTiempo);
         super.onDestroy();

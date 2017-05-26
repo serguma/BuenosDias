@@ -4,10 +4,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import android.util.Log;
 import android.widget.Toast;
 
+import serguma.buenosdias.preferens.Preferen;
 import serguma.buenosdias.receiver.Reciver;
 
 /**
@@ -31,6 +34,12 @@ public class Alarma {
         ahora.set(Calendar.HOUR_OF_DAY, hora);
         ahora.set(Calendar.MINUTE, minuto);
 
+        SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        simpleDateFormat.format(ahora.getTime());
+        String fechaCadena = simpleDateFormat.format(ahora.getTime());
+
+        Preferen.guardarFecha(ctx, fechaCadena.toString());
+        Preferen.guardarTiempo(ctx, hora, minuto);
 
         nuevoMilisegundo = ahora.getTimeInMillis();
 

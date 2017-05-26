@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.cice.mymenuapp.MainActivity">
+
+    <item
+        android:id="@+id/opcion1"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:orderInCategory="1"
+        android:title="Configuración"
+        app:showAsAction="always|withText"></item>
+
+    <item
+        android:id="@+id/opcion2"
+        android:icon="@android:drawable/ic_menu_today"
+        android:orderInCategory="1"
+        android:title="Historial"
+        app:showAsAction="always|withText"></item>
+
+</menu>

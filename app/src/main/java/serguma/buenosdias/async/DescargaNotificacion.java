@@ -112,10 +112,10 @@ public class DescargaNotificacion extends AsyncTask<Void, Void, BuenosDias> {
 
             //añado la hora
             Date actual = new Date();
+            
+            String fechaNotiDesc = dia+"/"+mes+"/"+anio+" "+actual.getHours()+":"+actual.getMinutes();
 
-            //String fechaNotiDesc = dia+"/"+mes+"/"+anio;
-
-            String fechaNotiDesc = "18/05/2017 "+actual.getHours()+":"+actual.getMinutes();
+            //String fechaNotiDesc = "18/05/2017 "+actual.getHours()+":"+actual.getMinutes();
             Date dateDescarga = simpleDateFormat.parse(fechaNotiDesc , new ParsePosition(0));
 
             Calendar fechaDescarga = Calendar.getInstance();

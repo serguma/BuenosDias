@@ -27,12 +27,18 @@ public class Alarma {
 
         //Lo programo para el día siguiente día, PERO PARA PROBAR SOLO CAMBIO LA HORA Y LOS MINUTOS
 
-        if(control == 1){
+/*        if(control == 1){
             ahora.add(Calendar.DAY_OF_WEEK, 1);
+        }*/
+        if(control == 1) {
+            ahora.add(Calendar.DAY_OF_WEEK, 1);
+            Log.d(ctx.getClass().getCanonicalName(), "He entrado: ");
+            ahora.set(Calendar.HOUR_OF_DAY, hora);
+            ahora.set(Calendar.MINUTE, minuto);
+        }else{
+            ahora.set(Calendar.HOUR_OF_DAY, hora);
+            ahora.set(Calendar.MINUTE, minuto);
         }
-
-        ahora.set(Calendar.HOUR_OF_DAY, hora);
-        ahora.set(Calendar.MINUTE, minuto);
 
         SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         simpleDateFormat.format(ahora.getTime());
